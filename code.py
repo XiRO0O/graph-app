@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+import matplotlib
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 sg.theme('Dark')
 table_content = []
@@ -14,6 +16,12 @@ layout = [
 ]
 
 window = sg.Window('Graph App', layout)
+
+fig = matplotlib.figure.Figure(figsize = (5,4))
+fig.add_subplot(111).plot([],[])
+figure_canvas_agg = FigureCanvasTkAgg(fig,window['-CANVAS-'].TKCanvas)
+figure_canvas_agg.draw()
+figure_canvas_agg.get_tk_widget().pack()
 
 while True:
     event, values = window.read()
